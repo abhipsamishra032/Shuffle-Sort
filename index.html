@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+	<title>Shuffle and Sort</title>
+	<meta charset="UTF-8">
+	<link type="text/css" rel="stylesheet" href="./css/style.css" />
+	<link type="text/css" rel="stylesheet" href="./css/normalize.css" />
+	<script>
+        function shuffle(items) {
+            var cached = items.slice(0), temp, i = cached.length, rand;
+            while(--i) {
+                rand = Math.floor(i * Math.random());
+                temp = cached[rand];
+                cached[rand] = cached[i];
+                cached[i] = temp;
+            }
+            return cached;
+        }
+        function shuffleNodes() {
+            var list = document.getElementById("shuffleAndSort");
+            var nodes = list.children, i = 0;
+            nodes = Array.prototype.slice.call(nodes);
+            nodes = shuffle(nodes);
+            while(i < nodes.length) {
+                list.appendChild(nodes[i]);
+                ++i;
+            }
+        } 
+        function sort(items) {
+            var nodesValArr = [], updatedItems = items;
+            for(var j=0; j<updatedItems.length; j++) {
+                nodesValArr.push(parseInt(updatedItems[j].innerHTML));
+            }
+            nodesValArr = nodesValArr.sort();
+            for(var j=0; j<updatedItems.length; j++) {
+                var updatedNodes = updatedItems[j];
+                updatedItems[j].innerHTML = nodesValArr[j]+'';
+                
+            }
+            return updatedItems;
+        }
+		function sortList() {
+            var list = document.getElementById("shuffleAndSort");
+            var nodes = list.children, i = 0;
+            
+            var updatedNodes = sort(nodes);
+            console.log('after update => ', updatedNodes);
+            while(i < updatedNodes.length) {
+                list.children[i].innerHTML = updatedNodes[i].innerHTML;
+                ++i;
+            }
+		 }
+	</script>
+
+</head>
+<body>
+ <div class="wrapper">
+ 	<header>
+		<h1>Shuffel and Sort</h1>
+		<div class="line"></div>
+	</header>
+
+	<aside>
+	<button id="shuffle" type="button" class="btn blue active" onclick="shuffleNodes()">Shuffle</button>
+	<button type="button" onclick="sortList()" class="btn blue" >Sort</button>
+		 
+	</aside> 
+
+    <section> 
+		<article>
+			 <ul id="shuffleAndSort">
+			 	<li class="li">1</li>
+			 	<li class="li">2</li>
+			 	<li class="li">3</li>
+			 	<li class="li">4</li>
+			 	<li class="li">5</li>
+			 	<li class="li">6</li>
+			 	<li class="li">7</li>
+			 	<li class="li">8</li>
+			 	<li class="li">9</li>
+			 </ul>  
+		</article> 
+    </section> 
+    <footer>
+		<p>Shuffel and Sort by Abhipsa Mihra</p>
+	</footer>
+  </div> 
+</body>
+</html>
